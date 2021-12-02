@@ -1,0 +1,62 @@
+{% extends "v_0_1/base.html" %} 
+{% block title %}Aqua's Data Log{% endblock %} 
+{% block content %}
+{% load static from staticfiles %}
+
+<div id='datalog'>
+<div id="visualization"></div>
+
+</div>
+
+<script type="text/javascript">
+
+
+  var dataArray = [];
+var plotData = {x:    '',
+           y: 0
+};
+
+plotData.init = function(x,y){
+      this.x=x;
+      this.y =y;
+  
+        
+}            
+
+$.post( "/v_0_1/getPlotData/", function( data ) {
+ 
+ for (i in data){
+  new_data = Object.create(plotData);
+  datetimeB=data[i][0]+" "+ data[i][3];
+  //console.log(datetimeB);
+  total = data[i][5] + data[i][6] +data[i][7];
+  //console.log(data[i][5]);
+  new_data.init(datetimeB,total);
+  dataArray.push(new_data);
+
+  }
+
+  // console.log(dataArray);
+
+ var container = document.getElementById('visualization');
+
+  var items = dataArray;
+   
+
+  var dataset = new vis.DataSet(items);
+  var options = {
+    start: '2016-03-01',
+    end: '2016-09-29',
+   
+    shaded: 'true',
+    orientation	:'bottom'
+  };
+  var graph2d = new vis.Graph2d(container, dataset, options);
+  });  
+
+</script>
+
+
+   
+   <a href="/v_0_1/logout/">Logout</a>
+{% endblock %}

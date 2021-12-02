@@ -1,0 +1,36 @@
+{% extends "v_0_1/base.html" %} 
+{% block title %}Sensor list{% endblock %} 
+{% block content %}
+{% load static from staticfiles %}
+<div class="container">  
+    <div class="row">  
+    <div class="center-block">  
+   <p> Sensor List page </p><br>
+  
+  <h1> Sensor 1 </h1>
+  <div id="state"></div>
+  </ul>
+
+  <script>
+  
+  $.post( "/v_0_1/checkSensor/", function( data ) {
+  
+    console.log(data);
+    
+    if(data.localeCompare("on")==0){
+           $('#state').html("ONLINE"); 
+           $('#state').css( "background-color", "#4dff4d");
+    }
+        if(data.localeCompare("off")==0){
+           $('#state').html("OFFLINE"); 
+           $('#state').css( "background-color", "red");
+    }
+ 
+  });
+  
+  </script>
+   </div>
+</div>
+</div>
+   <a href="/v_0_1/logout/">Logout</a>
+{% endblock %}

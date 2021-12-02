@@ -1,0 +1,30 @@
+{% extends "v_0_1/base.html" %} 
+{% block title %}Aqua's Raw Data{% endblock %} 
+{% block content %}
+{% load static from staticfiles %}
+<div class="container">  
+    <div class="row">  
+   <button data-bind="click: function() { $root.debug()}">Add Data</button>
+   <button data-bind="click: function() { $root.ajaxTestVM()}">Test</button>
+   <button data-bind="click: function() { $root.remove()}">Remove</button>
+     <div style="color:white;"data-bind="foreach: $root.DataList" >
+           <div  class="page-header"><h3>Date:<span data-bind="text: date"></span></h3></div>
+           <ul class="oneline">
+           <li>Sensor ID:<span class="bold" data-bind="text: arduinoid"></span></li><br>
+           <li>Water level in cm:<span class="bold"  data-bind="text: cm"></span></li>
+           <li>Water level in inches:<span class="bold"  data-bind="text: inches"></span></li>
+           <li>Time:<span class="bold"  data-bind="text: time"></span></li>
+           <li>Sensor Date:<span class="bold"  data-bind="text: sensorDate"></span></li>
+           <li>firstLevel:<span class="bold"  data-bind="text: firstLevel"></span></li>
+           <li>secondLevel:<span class="bold"  data-bind="text: secondLevel"></span></li>
+           <li>thirdLevel:<span class="bold"  data-bind="text: thirdLevel"></span></li>
+           
+           </ul>
+    </div>       
+           
+   
+</div>
+</div>
+   
+   <a href="/v_0_1/logout/">Logout</a>
+{% endblock %}

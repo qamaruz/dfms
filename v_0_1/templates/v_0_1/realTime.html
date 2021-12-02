@@ -1,0 +1,142 @@
+{% extends "v_0_1/base.html" %} 
+{% block title %}Aqua's Sensor list{% endblock %} 
+{% block content %}
+{% load static from staticfiles %}
+<div class="container">  
+    <div class="row">  
+    <div class="center-block">  
+   <p> RealTime Data</p><br>
+   
+   
+  <p>Sensor 1:</p> <div class="progress">
+  <div id="real" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+    <span class="sr-only">40% Complete (success)</span>
+  </div>
+</div>
+
+  <p>Sensor 2:</p> <div class="progress">
+  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+    <span class="sr-only">40% Complete (success)</span>
+  </div>
+</div>
+
+  <p>Sensor 3:</p> <div class="progress">
+  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+    <span class="sr-only">40% Complete (success)</span>
+  </div>
+</div>
+
+  <p>Sensor 4:</p> <div class="progress">
+  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+    <span class="sr-only">40% Complete (success)</span>
+  </div>
+</div>
+
+<div id="status" ></div>
+      
+    <script>
+$('#status').bind("DOMSubtreeModified",function(){
+
+            $.post( "http://api.clickatell.com/http/sendmsg?user=qamaruz&password=ZGJGbIRcdgadBg&api_id=3621525&to=6738643939&text=WARNING_WATER_LEVEL_RISING", function( data ) {
+            });
+            test();
+        
+
+});
+    count=0;
+    
+    var plotData = {firstLevel:    0,
+           secondLevel: 0,
+           thirdLevel:0
+};
+
+plotData.init = function(firstLevel,secondLevel,thirdLevel){
+      this.firstLevel=firstLevel;
+      this.secondLevel =secondLevel;
+      this.thirdLevel = thirdLevel;
+      
+  
+        
+}  
+    function start(){
+    console.log("Streaming..");
+    ;
+    while (count<999) {
+    
+    $.post( "/v_0_1/getRealTimeData/", function( data ) {
+        
+       console.log(data);
+       new_data = Object.create(plotData);
+       //console.log(total);
+       new_data.init(Number(data[0][0]),Number(data[0][1]),Number(data[0][2]));
+       total=new_data.firstLevel+new_data.secondLevel+new_data.thirdLevel;
+       
+        if(total==0){
+       
+          $( "#real" ).css( {width:'0%'}); 
+ 
+          
+
+          }
+       
+       if(total==1){
+       
+          $( "#real" ).css( {width:'10%'});
+          $( "#real" ).removeClass("progress-bar-warning progress-bar-danger");
+           $( "#real" ).addClass("progress-bar-success")
+            
+ 
+          }
+          
+        if(total==2){
+       
+          $( "#real" ).css( {width:'50%'});  
+          
+          $( "#real" ).removeClass("progress-bar-success progress-bar-danger");
+          $( "#real" ).addClass("progress-bar-warning");
+                            $('#status').html("Triggered");
+                           
+          
+          }
+          
+            if(total==3){
+       
+       
+          $( "#real" ).css( {width:'100%'}); 
+          $( "#real" ).removeClass("progress-bar-success progress-bar-warning");
+          $( "#real" ).addClass("progress-bar-danger");     
+          
+          
+          
+          }
+       
+       console.log(total);
+       //total
+    
+
+});
+    
+     count=count+1
+   
+    
+    }
+    
+    }
+    
+    function test(){
+    console.log("Test");
+         $.post( "/v_0_1/sendEmail/", function( data ) {
+         
+         
+         });
+
+    }
+    
+    </script>
+       <button onclick=start()>Start Real Time Monitoring</button>
+       <button onclick=test()>Test</button>
+   </div>
+</div>
+</div>
+   <a href="/v_0_1/logout/">Logout</a>
+{% endblock %}

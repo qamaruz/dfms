@@ -1,0 +1,164 @@
+html,
+body {
+  height: 100%;
+  background-color:#161716;
+  /* The html and body elements cannot have any padding or margin. */
+}
+
+p{
+    color: #FFFFFF;
+}
+
+label{
+    color: #FFFFFF;
+}
+
+h1{
+    color: #FFFFFF;
+}
+
+.hidden
+{
+	display:none;
+}
+
+#state
+{
+    width: 200px;
+    height:200px;
+}
+#upload{
+    display:none
+}
+
+.oneline{
+
+    list-style-type : none;
+    margin:0px;
+    padding:0px;
+    overflow:hidden;
+}
+
+.oneline > li{
+
+display :inline;
+float:left;
+margin:0px 10px 0px 10px;
+
+
+}
+
+
+#datalog{
+      background-color:#fff;
+}
+.center-block {  
+  display: block;  
+  margin-right: auto;  
+  margin-left: auto;  
+  width: 400px;
+}  
+
+.centerKAN
+{
+    max-width:960px;
+    width:100%;
+    margin: 0 auto;
+}
+.centerKANTEXT
+{
+    text-align:center;
+}
+
+.header-cont {
+    width:100%;
+    position:fixed;
+    top:0px;
+
+}
+.header {
+    height:50px;
+    background:#F0F0F0;
+    border:1px solid #CCC;
+    width:960px;
+    margin:0px auto;
+}
+
+@media (max-width: @screen-xs) {
+    body{font-size: 10px;}
+}
+
+@media (max-width: @screen-sm) {
+    body{font-size: 14px;}
+}
+
+.bold{
+
+font-weight:600;
+}
+
+#map {
+        width: 500px;
+        height: 400px;
+         background-color: #CCC;
+      }
+
+h1{
+    font-size: 1.4em;
+}       
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by its height */
+  margin: 0 auto -60px;
+  /* Pad bottom by footer height */
+  padding: 0 0 60px;
+}
+
+/* Set the fixed height of the footer here */
+#footer {
+  height: 60px;
+  background-color: #161716;
+}
+
+a{
+    color:white;
+}
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+#wrap > .container {
+  padding: 10px 15px 0;
+}
+
+#footer > .container {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+
+.navbar-header {
+ 	float:none;
+    width:100%;
+    padding:10px;
+}
+.navbar-brand {
+    font-size:20pt;
+    float:none;
+}
+#bottomNav {
+	padding:10px;
+}
+#bottomNav a {
+    font-size:24pt;
+    color:#ddd;
+    text-decoration:none;
+}
+#bottomNav a:hover {
+    color:#fff;
+}
